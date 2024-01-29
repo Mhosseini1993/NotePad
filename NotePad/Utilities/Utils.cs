@@ -11,6 +11,7 @@ namespace NotePad.Utilities
     {
         public static string MiladiToShamsi(this DateTime date)
         {
+
             PersianCalendar pc = new PersianCalendar();
             return $"{pc.GetYear(date).ToString("0000")}/{pc.GetMonth(date).ToString("00")}/{pc.GetDayOfMonth(date)} " +
                    $"{pc.GetHour(date).ToString("00")}:{pc.GetMinute(date).ToString("00")}";
