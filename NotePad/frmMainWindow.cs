@@ -20,7 +20,7 @@ namespace NotePad
         {
             if (isDocumentChanged)
             {
-                DialogResult dialogResult = MessageBox.Show("آیا می خواهید متن نوشته شده را ذخیره کنید", "اطلاع",
+                DialogResult dialogResult = MessageBox.Show("Do you want to save changes?", "information",
                           MessageBoxButtons.YesNoCancel,
                           MessageBoxIcon.Question,
                           MessageBoxDefaultButton.Button1);
@@ -59,6 +59,9 @@ namespace NotePad
         private void txtDocument_TextChanged(object sender, EventArgs e)
         {
             isDocumentChanged=true;
+            lblCharCount.Text=txtDocument.Text.Length.ToString();
+            lblWordCount.Text=(txtDocument.Text.Split(' ').Length-1).ToString();
+            
         }
 
         private void btnOpenDocument_Click(object sender, EventArgs e)
@@ -118,7 +121,7 @@ namespace NotePad
         {
             if (isDocumentChanged)
             {
-                DialogResult dialogResult = MessageBox.Show("تغییراتی در سند ایجاد کرده اید آیا می خواهید تغیرات را ذخیره کنید", "اطلاع",
+                DialogResult dialogResult = MessageBox.Show("Do you want to save changes?", "Information",
                           MessageBoxButtons.YesNo,
                           MessageBoxIcon.Question,
                           MessageBoxDefaultButton.Button1);
@@ -202,8 +205,9 @@ namespace NotePad
         private void btnSearch_Click(object sender, EventArgs e)
         {
             frmSearch frm = new frmSearch(this);
-            frm.Show();
-            txtDocument.BackColor=Color.White;
+            frm.ShowDialog();
+            txtDocument.BackColor = Color.White;
+            txtDocument.SelectionBackColor = Color.White;   
         }
     }
 }
