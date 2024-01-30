@@ -206,7 +206,6 @@ namespace NotePad
         {
             frmSearch frm = new frmSearch(this);
             frm.ShowDialog();
-            txtDocument.BackColor = Color.White;
             txtDocument.SelectionBackColor = Color.White;   
         }
     }

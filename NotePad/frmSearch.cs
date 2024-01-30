@@ -29,10 +29,12 @@ namespace NotePad
             if (!results.Any())
             {
                 results= Search(txtSearchTerm.Text);
+                lblFindCount.Text=results.Count.ToString();
             }
             if (!results.Any())
             {
                 currentIndex=0;
+                lblFindCount.Text="0";
                 MessageBox.Show("Not found!!");
             }
             else
@@ -108,7 +110,44 @@ namespace NotePad
                 currentIndex=results.Count-1;
             }
             HighLightSelectedText();
+        }
 
+        private void txtSearchTerm_TextChanged(object sender, EventArgs e)
+        {
+            results.Clear();
+            frmMainWindow.txtDocument.SelectionBackColor = Color.White;
+        }
+        private void btnReplace_Click(object sender, EventArgs e)
+        {
+            results= Search(txtSearchTerm.Text);
+            if (results.Any())
+            {
+                frmMainWindow.txtDocument.SelectionBackColor= Color.White;
+                frmMainWindow.txtDocument.SelectionBackColor= Color.Yellow;
+
+                frmMainWindow.txtDocument.SelectedText=frmMainWindow.txtDocument.SelectedText
+                    .Replace(frmMainWindow.txtDocument.SelectedText, txtReplace.Text);
+            }
+            else
+            {
+                frmMainWindow.txtDocument.SelectionBackColor = Color.White;
+                MessageBox.Show("Not found!!");
+            }
+        }
+
+        private void btnReplaceAll_Click(object sender, EventArgs e)
+        {
+            results= Search(txtSearchTerm.Text);
+            if (results.Any())
+            {
+                frmMainWindow.txtDocument.Text=frmMainWindow.txtDocument.Text
+                    .Replace(txtSearchTerm.Text, txtReplace.Text);
+            }
+            else
+            {
+                frmMainWindow.txtDocument.SelectionBackColor = Color.White;
+                MessageBox.Show("Not found!!");
+            }
         }
     }
 }
